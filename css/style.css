@@ -21,7 +21,7 @@ a {
 
 
 /* ANIMATION */
-
+/*
 span[class^="icon"] {
   -webkit-animation-name: focus;
   -webkit-animation-iteration-count: once;
@@ -62,7 +62,7 @@ span[class^="icon"] {
     font-size: 1.2em;
   }
 }
-
+*/
 @media screen and (min-width: 450px) {
   .wrap {
     font-size: 2em;
