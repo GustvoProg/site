@@ -1,0 +1,75 @@
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+h1 {
+  font-family: "Bree Serif", serif;
+  font-size: 4em;
+}
+
+.blurred {
+  background: url('../img/responsive/parallax.jpg') 0 -200px/100% 100% no-repeat fixed;
+  margin: -35px
+}
+
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding-top: 100px;
+  color: #e4e4e4;
+  height: 500px;
+}
+
+
+#text-slider {
+  background: #2e2ecd;
+}
+
+/* PAGE RESPONSIVE */
+
+iframe {
+  display: block;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.row {
+  background: #aaa;
+  text-align: center;
+}
+
+.row h3 {
+  padding-bottom: 25px;
+  color: #222;
+}
+
+.site-input {
+  max-width: 800px;
+  margin: 2% auto;
+  text-align: center;
+}
+
+input[type=text] {
+  width: 75%;
+  font-size: 2em;
+  padding-left: 5px;
+  color: #222;
+}
+
+input[type=button] {
+  width: 20%;
+  height: 2.5em;
+  float: right;
+  background-color: tomato;
+  border: none;
+}
+
+.jumbo {
+  text-align: center;
+}
+
+#hilite {
+  color: #19914B;
+  font-size: 1.2em;
+}
+
