@@ -3,7 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Estevan Maito - Soluções web</title>
+  <meta name="description" content="Websites de resultados incríveis. Conecte offline e online e impulsione seus negócios.">
+  <meta name="keywords" content="websites, seo, marketing, responsivo">
+  <meta name="author" content="Estevan Maito">
+  
+  <title>Estevan Maito</title>
   <!-- Google Fonts -->
   <link href='http://fonts.googleapis.com/css?family=Bree+Serif|Ultra|Source+Sans+Pro' rel='stylesheet' type='text/css'>
   <!-- Bootstrap 3.3.1 -->
@@ -14,7 +18,7 @@
   <link rel="stylesheet" href="css/font-estevan.css">
 </head>
 
-<body>
+<body data-spy="scroll" data-target="#navbar">
   <div class="container-fluid heading" id="home">
     <div class="container center-header">
       <div class="row jumbo">
@@ -34,7 +38,7 @@
           <h1 class="logo">Estevan Maito</h1>
         </div>
         
-        <div class="col-md-8 col-sm-8 hidden-xs">
+        <div id="navbar" class="col-md-8 col-sm-8 hidden-xs">
           <ul class="nav nav-pills pull-right">
             <li><a href="#home">Home</a></li>
             <li><a href="#servicos">Serviços</a></li>
@@ -106,7 +110,7 @@
             </div>
 
             <div class="col-md-9">
-              <p>Sou autodidata e especialista em websites que se adaptam a qualquer tela. Do menor smartphone a televisores e projetores. Além disso, tenho orgulho de ter sido recentemente <a href="">certificado pelo Google</a> na plataforma de análise Google Analytics, que adiciona o estudo de estatísticas da web à minha caixa de ferramentas.</p> 
+              <p>Sou autodidata e especialista em websites que se adaptam a qualquer tela. Do menor smartphone a televisores e projetores. Além disso, tenho orgulho de ter sido recentemente <a href="https://www.google.com.br/partners/#i_profile;idtf=107845795395693660963;" target="_blank">certificado pelo Google</a> na plataforma de análise Google Analytics, que adiciona o estudo de estatísticas da web à minha caixa de ferramentas.</p> 
               <p>Independente se você precisa de um website ou e-commerce totalmente novo, um empurrão nas redes sociais ou converter mais clientes no seu website atual, tenho certeza que posso lhe ajudar.</p>
               <p>Minhas ferramentes principais são HTML5, CSS3, JavaScript, jQuery, AngularJS e SASS. Acompanho ativamente o desenvolvimento de novas tecnologias e gosto de estar sempre atualizado e implementando o que aprendo nos websites que construo.</p>
             </div>
@@ -116,13 +120,23 @@
       
       <!-- CALL TO ACTION TESTE RESPONSIVO -->
       
-      <div class="parallax">
+      <div id="parallax">
         <div class="container">
           <div class="row">
             <h2>Seu site é responsivo?</h2>
             <p class="lead">Faça o teste e <span class="hilite">descubra se você está perdendo 65% dos seus visitantes!</span></p>
-            <a href="responsive.html" class="btn btn-success" target="_blank">FAÇA O TESTE</a>
-          </div>
+            <a href="responsive.html" class="btn btn-success" id="responsive" target="_blank">FAÇA O TESTE</a>
+            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="responsive-modal">
+              <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">Devido à simulação de telas maiores que a de seu dispositivo atual, recomendo que você utilize um computador para executar os testes.</h4>
+                  </div>
+                </div>
+              </div>
+            </div> <!-- END MODAL -->
+          </div> <!-- END ROW -->
         </div> <!-- END CONTAINER -->
       </div> <!-- END PARALLAX -->
       
@@ -187,7 +201,7 @@
               <p><a href="mailto:estevan@estevanmaito.com">estevan@estevanmaito.com</a></p>
             </div>
 
-            <form role="form">
+            <form class="col-md-12" role="form">
               <div class="form-group">
                 <label for="nome">Nome</label>
                 <input type="text" name="nome" id="nome" class="form-control">
@@ -209,8 +223,8 @@
 
             <footer class="text-center footer">
               <p>Também estou aqui:</p>
-              <a href="http://twitter.com/estevanmaito" class="icon-twitter-1"></a>
-              <a href="http://facebook.com/estevan.maito" class="icon-facebook"></a>
+              <a href="http://twitter.com/estevanmaito" class="icon-twitter-1" target="_blank"></a>
+              <a href="http://facebook.com/estevan.maito" class="icon-facebook" target="_blank"></a>
             </footer>
 
           </div> <!-- END CONTATO -->
@@ -224,6 +238,7 @@
   
   
   <script src="js/jquery-2.1.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
   <script src="js/waypoints.min.js"></script>
   <script src="js/waypoints-sticky.min.js"></script>
   <script src="js/script.js"></script>

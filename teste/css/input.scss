@@ -39,6 +39,8 @@ body {
   font-size: $body-font-size;
   background: $primary-background-color;
   color: $primary-color;
+  position: relative;
+  height: 100%;
 }
 
 h1 {
@@ -78,28 +80,30 @@ a:hover {
 
 .odd-row {
   background: $secondary-background-color;
+  margin: 0 -15px 0 -15px;
 }
 
 .hilite {
   color: $secondary-color;
 }
-
+/*
 .container-fluid {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
-
+*/
 .disclaimer {
   margin-bottom: 2em;
 }
 
-.parallax {
-  background: black url('../img/parallax.jpg') no-repeat fixed center;
-  background-size: 300%;
+#parallax {
+  background: black url('../img/parallax.jpg') no-repeat center;
+  background-size: 200%;
   color: $primary-background-color;
   padding-top: 2em;
   padding-bottom: 3em;
   text-align: center;
+  margin: 0 -15px 0 -15px;
 }
 
 .contact-wrapper {
@@ -129,14 +133,14 @@ BANNER
 */
 
 .heading {
-  min-height: 100vh;
+  height: 100vh;
   background: $primary-color url('../img/header.jpg') 500px -200px/500px 500px no-repeat fixed;
   background-size: 100%;
   color: $secondary-color;
   
   h1 {
-    font-size: $banner-font-size;
-    margin-bottom: 1.5em;
+    font-size: 8vh; /* $banner-font-size */
+    margin-bottom: 1em;
   }
   
   .arrow {
@@ -148,10 +152,10 @@ BANNER
   a {
     color: inherit;
   }
-  
+
   .center-header {
     position: relative;
-    margin-top: 5vh;
+    margin-top: 20vh; /*5*/
   }
 }
 
@@ -176,7 +180,8 @@ nav {
     margin-top: 0.8em;
     
     li a {
-      color: $primary-color;
+      color: $primary-color !important;
+      background: none !important;
       
       &:hover {
         color: inherit;
@@ -184,6 +189,18 @@ nav {
     }
   }
 }
+
+.nav li.active a {
+  background: none;
+  border-bottom: 2px solid $secondary-color;
+  color: $primary-color;
+  border-radius: 0;
+  
+  &:hover {
+    color: inherit;
+    background: none !important;
+  }
+} /* ADDED 19/01/15 - SCROLLSPY */
 
 .stuck {
   background: none repeat scroll 0 0 $primary-background-color;
@@ -225,13 +242,16 @@ textarea {
   color: $secondary-color !important;
   border-radius: 5px !important;
   
-  &:hover {
+  &:hover,
+  &:active,
+  &:focus {
     text-decoration: none !important;
   }
 }
 
 .btn-success,
-.btn-success:hover {
+.btn-success:hover,
+.btn-success:focus {
   background: $secondary-color !important;
   border-color: $secondary-color !important;
   color: $primary-color;
@@ -247,6 +267,25 @@ ICONS
 span[class^=icon],
 a[class^=icon] {
   font-size: $icon-size;
+  color: $primary-color;
+  text-decoration: none;
+  
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none !important;
+  }
+}
+
+
+
+/*
+-----------------------------
+MODAL
+-----------------------------
+*/
+
+.modal {
   color: $primary-color;
 }
 
@@ -271,7 +310,7 @@ TIPS
     position: absolute;
     display: inline-block;
     border-left: 20px solid transparent;
-    border-top: 15px solid #FFB016;
+    border-top: 15px solid $secondary-color;
     border-right: 20px solid transparent;
     left: 50%;
     margin-left: -20px;
@@ -287,22 +326,29 @@ TIPS
 #my-photo {
   margin: 0 auto;
   margin-bottom: 1.2em;
+  max-width: 50%;
 }
 
 /*
 /* Extra small devices (phones, less than 768px) */
 /* No media query since this is the default in Bootstrap */
 
+
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
+  
+  #parallax {
+    background: black url('../img/parallax.jpg') no-repeat fixed center;
+  }
+  
   .heading {
     h1 {
-      font-size: 4em;
+      font-size: 8vh;
       margin-bottom: .2em;
     }
     
     .center-header {
-      margin-top: 10vh;
+      margin-top: 20vh; /* 10vh */
     }
   }
   
@@ -320,14 +366,18 @@ TIPS
 
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: 992px) {
+  #parallax {
+    background-size: 150%;
+  }
+  
   .heading {
     h1 {
-      font-size: 5em;
+      font-size: 8vh; /* 5em */
       margin-bottom: .2em;
     }
     
     .center-header {
-      margin-top: 15vh;
+      margin-top: 25vh; /* 15vh */
     }
   }
   
@@ -366,6 +416,10 @@ TIPS
   .overlay {
     display: none;
   }
+  
+  #my-photo {
+    max-width: 100%;
+  }
 }
 
 /* Large devices (large desktops, 1200px and up)*/
@@ -393,7 +447,7 @@ TIPS
     }
   }
   
-  .parallax {
+  #parallax {
     background-size: 100%;
   }
   
@@ -412,6 +466,171 @@ TIPS
   }
   
 }
+
+/*
+============================================
+PAGE RESPONSIVE
+============================================
+*/
+
+#test {
+  
+  .parallax-responsive {
+    background: black url('../img/parallax2.jpeg') no-repeat fixed center;
+    /* 0 -100px/500px 100px no-repeat fixed; */
+    background-size: 100%;
+    color: $primary-background-color;
+    text-align: center;
+    padding-top: 4em;
+    padding-bottom: 6em;
+    height: 100vh;
+
+    .hilite {
+      font-size: 2em;
+      display: inline-block;
+      margin-top: 0.3em;
+      margin-bottom: 1em;
+    }
+
+    input {
+      margin-top: 0.5em;
+      width: 100%;
+      padding: 0.3em 0.3em 0.3em 0.8em;
+      background: #eee !important;
+      font-size: 2em;
+    }
+
+  }
+
+  .btn-responsive {
+    width: 25%;
+    margin-top: 2em;
+    background: $secondary-color !important;
+    color: $primary-color;
+    padding: 0.6em 0.6em 0.6em 1.6em;
+  }
+
+    .btn-link {
+      color: $primary-color;
+      background: $secondary-color;
+      margin-top: 2em;
+    }
+
+    footer {
+      margin: 2em 0 2em 0;
+    }
+}
+
+.cta {
+  background: url('../img/responsive-parallax.jpg') no-repeat fixed center;
+}
+
+.center-cta {
+  padding: 2em 0 4em 0;
+}
+
+
+/*
+============================================
+PAGE RESPONSIVE 2
+============================================
+*/
+
+#test2 {
+  
+  .first-blue {
+    padding: 3em 0 3em 0;
+    background: #44A2C0;
+    font-size: 1.5em;
+    
+    span {
+      margin-top: .6em;
+      display: inline-block;
+    }
+    
+    .hilite {
+      font-size: 1.5em;
+      color: #f4f4f4;
+    }
+  }
+  
+  .second-dark {
+    background: $primary-background-color;
+    color: $primary-color;
+    
+    div > p {
+      font-size: 1.2em;
+    }
+    
+    .logos {
+      margin-top: -1.5em;
+    }
+    
+    .amazon {
+      margin-top: -1.5em;
+    }
+    
+  }
+  
+  .third-yellow {
+    background: $secondary-background-color;
+    color: $primary-color;
+    text-align: center;
+    
+    input {
+      width: 70%;
+      padding: 0.3em 0.3em 0.3em 0.8em;
+      background: #eee !important;
+      font-size: 2em;
+    }
+    
+    .btn-responsive {
+      width: 25%;
+      margin-top: 2em;
+      background: $primary-color;
+      color: #f4f4f4;
+      padding: 0.6em 0.6em 0.6em 0.6em;
+      text-decoration: none;
+    }
+  }
+  
+  footer {
+    padding: 2em 0;
+  }
+  
+  .btn-cta,
+  .btn-cta:hover,
+  .btn-cta:active,
+  .btn-cta:focus {
+    text-decoration: none;
+    color: $primary-color !important;
+    background: $secondary-color !important;
+  }  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -17,7 +17,9 @@ body {
   font-family: "Source Sans Pro", sans-serif;
   font-size: 14px;
   background: #F4F4F4;
-  color: #152532; }
+  color: #152532;
+  position: relative;
+  height: 100%; }
 
 h1 {
   font-size: 1.6em; }
@@ -45,25 +47,29 @@ a:hover {
     margin-bottom: 1.2em; }
 
 .odd-row {
-  background: #eee; }
+  background: #eee;
+  margin: 0 -15px 0 -15px; }
 
 .hilite {
   color: #FFB016; }
 
+/*
 .container-fluid {
   padding-left: 0 !important;
-  padding-right: 0 !important; }
-
+  padding-right: 0 !important;
+}
+*/
 .disclaimer {
   margin-bottom: 2em; }
 
-.parallax {
-  background: black url("../img/parallax.jpg") no-repeat fixed center;
-  background-size: 300%;
+#parallax {
+  background: black url("../img/parallax.jpg") no-repeat center;
+  background-size: 200%;
   color: #F4F4F4;
   padding-top: 2em;
   padding-bottom: 3em;
-  text-align: center; }
+  text-align: center;
+  margin: 0 -15px 0 -15px; }
 
 .contact-wrapper {
   text-align: center; }
@@ -86,13 +92,14 @@ BANNER
 -----------------------------
 */
 .heading {
-  min-height: 100vh;
+  height: 100vh;
   background: #152532 url("../img/header.jpg") 500px -200px/500px 500px no-repeat fixed;
   background-size: 100%;
   color: #FFB016; }
   .heading h1 {
-    font-size: 2em;
-    margin-bottom: 1.5em; }
+    font-size: 8vh;
+    /* $banner-font-size */
+    margin-bottom: 1em; }
   .heading .arrow {
     color: #FFB016;
     font-size: inherit;
@@ -101,7 +108,8 @@ BANNER
     color: inherit; }
   .heading .center-header {
     position: relative;
-    margin-top: 5vh; }
+    margin-top: 20vh;
+    /*5*/ }
 
 /*
 -----------------------------
@@ -117,10 +125,21 @@ nav {
   nav ul {
     margin-top: 0.8em; }
     nav ul li a {
-      color: #152532; }
+      color: #152532 !important;
+      background: none !important; }
       nav ul li a:hover {
         color: inherit; }
 
+.nav li.active a {
+  background: none;
+  border-bottom: 2px solid #FFB016;
+  color: #152532;
+  border-radius: 0; }
+  .nav li.active a:hover {
+    color: inherit;
+    background: none !important; }
+
+/* ADDED 19/01/15 - SCROLLSPY */
 .stuck {
   background: none repeat scroll 0 0 #F4F4F4;
   position: fixed;
@@ -152,11 +171,12 @@ textarea {
   background: #152532 !important;
   color: #FFB016 !important;
   border-radius: 5px !important; }
-  #btn-send:hover {
+  #btn-send:hover, #btn-send:active, #btn-send:focus {
     text-decoration: none !important; }
 
 .btn-success,
-.btn-success:hover {
+.btn-success:hover,
+.btn-success:focus {
   background: #FFB016 !important;
   border-color: #FFB016 !important;
   color: #152532; }
@@ -169,6 +189,20 @@ ICONS
 span[class^=icon],
 a[class^=icon] {
   font-size: 6em;
+  color: #152532;
+  text-decoration: none; }
+  span[class^=icon]:hover, span[class^=icon]:active, span[class^=icon]:focus,
+  a[class^=icon]:hover,
+  a[class^=icon]:active,
+  a[class^=icon]:focus {
+    text-decoration: none !important; }
+
+/*
+-----------------------------
+MODAL
+-----------------------------
+*/
+.modal {
   color: #152532; }
 
 /*
@@ -200,18 +234,23 @@ TIPS
 
 #my-photo {
   margin: 0 auto;
-  margin-bottom: 1.2em; }
+  margin-bottom: 1.2em;
+  max-width: 50%; }
 
 /*
 /* Extra small devices (phones, less than 768px) */
 /* No media query since this is the default in Bootstrap */
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
+  #parallax {
+    background: black url("../img/parallax.jpg") no-repeat fixed center; }
+
   .heading h1 {
-    font-size: 4em;
+    font-size: 8vh;
     margin-bottom: .2em; }
   .heading .center-header {
-    margin-top: 10vh; }
+    margin-top: 20vh;
+    /* 10vh */ }
 
   .row h2 {
     font-size: 2em !important; }
@@ -219,11 +258,16 @@ TIPS
     font-size: 1.6em; } }
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: 992px) {
+  #parallax {
+    background-size: 150%; }
+
   .heading h1 {
-    font-size: 5em;
+    font-size: 8vh;
+    /* 5em */
     margin-bottom: .2em; }
   .heading .center-header {
-    margin-top: 15vh; }
+    margin-top: 25vh;
+    /* 15vh */ }
 
   .row h2 {
     font-size: 3em !important; }
@@ -251,7 +295,10 @@ TIPS
       background: #FFB016; }
 
   .overlay {
-    display: none; } }
+    display: none; }
+
+  #my-photo {
+    max-width: 100%; } }
 /* Large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) {
   body {
@@ -269,7 +316,7 @@ TIPS
   .heading .center-header {
     margin-top: 33vh; }
 
-  .parallax {
+  #parallax {
     background-size: 100%; }
 
   .row h2 {
@@ -279,5 +326,98 @@ TIPS
 
   .thumbnail:hover .overlay {
     padding-top: 2.3em; } }
+/*
+============================================
+PAGE RESPONSIVE
+============================================
+*/
+#test .parallax-responsive {
+  background: black url("../img/parallax2.jpeg") no-repeat fixed center;
+  /* 0 -100px/500px 100px no-repeat fixed; */
+  background-size: 100%;
+  color: #F4F4F4;
+  text-align: center;
+  padding-top: 4em;
+  padding-bottom: 6em;
+  height: 100vh; }
+  #test .parallax-responsive .hilite {
+    font-size: 2em;
+    display: inline-block;
+    margin-top: 0.3em;
+    margin-bottom: 1em; }
+  #test .parallax-responsive input {
+    margin-top: 0.5em;
+    width: 100%;
+    padding: 0.3em 0.3em 0.3em 0.8em;
+    background: #eee !important;
+    font-size: 2em; }
+#test .btn-responsive {
+  width: 25%;
+  margin-top: 2em;
+  background: #FFB016 !important;
+  color: #152532;
+  padding: 0.6em 0.6em 0.6em 1.6em; }
+#test .btn-link {
+  color: #152532;
+  background: #FFB016;
+  margin-top: 2em; }
+#test footer {
+  margin: 2em 0 2em 0; }
+
+.cta {
+  background: url("../img/responsive-parallax.jpg") no-repeat fixed center; }
+
+.center-cta {
+  padding: 2em 0 4em 0; }
+
+/*
+============================================
+PAGE RESPONSIVE 2
+============================================
+*/
+#test2 .first-blue {
+  padding: 3em 0 3em 0;
+  background: #44A2C0;
+  font-size: 1.5em; }
+  #test2 .first-blue span {
+    margin-top: .6em;
+    display: inline-block; }
+  #test2 .first-blue .hilite {
+    font-size: 1.5em;
+    color: #f4f4f4; }
+#test2 .second-dark {
+  background: #F4F4F4;
+  color: #152532; }
+  #test2 .second-dark div > p {
+    font-size: 1.2em; }
+  #test2 .second-dark .logos {
+    margin-top: -1.5em; }
+  #test2 .second-dark .amazon {
+    margin-top: -1.5em; }
+#test2 .third-yellow {
+  background: #eee;
+  color: #152532;
+  text-align: center; }
+  #test2 .third-yellow input {
+    width: 70%;
+    padding: 0.3em 0.3em 0.3em 0.8em;
+    background: #eee !important;
+    font-size: 2em; }
+  #test2 .third-yellow .btn-responsive {
+    width: 25%;
+    margin-top: 2em;
+    background: #152532;
+    color: #f4f4f4;
+    padding: 0.6em 0.6em 0.6em 0.6em;
+    text-decoration: none; }
+#test2 footer {
+  padding: 2em 0; }
+#test2 .btn-cta,
+#test2 .btn-cta:hover,
+#test2 .btn-cta:active,
+#test2 .btn-cta:focus {
+  text-decoration: none;
+  color: #152532 !important;
+  background: #FFB016 !important; }
 
 /*# sourceMappingURL=output.css.map */
