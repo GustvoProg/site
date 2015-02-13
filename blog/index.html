@@ -42,7 +42,7 @@
       </p>
       <h2>Posts</h2>
       <div class="row">
-        <div class="post" ng-repeat="post in ctrl.posts">
+        <div class="post" ng-repeat="post in ctrl.posts | orderBy:'-date'">
           <a href="{{post.url}}">
             <h3>{{post.title}}</h3>
             <p><span class="date">{{post.date | date:'dd/MM/yy'}}</span> - {{post.content}}</p>
