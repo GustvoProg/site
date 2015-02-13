@@ -46,16 +46,19 @@
       <div ng-controller="BookCtrl as book">
         <button ng-click="book.open('livros')">Livros</button>
         <button ng-click="book.open('cursos')">Cursos</button>
-        <button ng-click="book.open('blogs')">Blogs</button>
-        <div ng-switch on="book.tab">
-          
-          <div ng-switch-when="livros" class="livros">
-            Filtrar:
+        <br>
+        
+        Filtrar:
              
               <input type="radio" name="recomendo" id="all" ng-model="recFilter" ng-value=""><label for="all">Todos</label>
               <input type="radio" name="recomendo" id="rec" ng-model="recFilter" ng-value="recomendo=true"><label for="rec">Recomendo</label>
               <input type="radio" name="recomendo" id="nrec" ng-model="recFilter" ng-value="recomendo=false"><label for="nrec">Não recomendo</label>
-            
+        
+        
+        <div ng-switch on="book.tab">
+         
+          
+          <div ng-switch-when="livros" class="livros">
             <div ng-repeat="livro in book.livros() | filter:recFilter">
               
               <div class="col-4">
@@ -68,12 +71,20 @@
             </div>
           </div>
           
-          <div ng-switch-when="cursos" class="cursos">
-            Em breve
-          </div>
-          
-          <div ng-switch-when="blogs" class="blogs">
-            Em breve
+          <div ng-switch-when="cursos" class="livros">
+            <div ng-repeat="curso in book.cursos() | filter:recFilter">
+              
+              <div class="col-4">
+                <div class="caixa">
+                  <span ng-class="book.getReClass(curso)"></span><h5>{{curso.title}}</h5>
+                  <img ng-src="{{curso.pic}}" alt="Capa de livro" width="150">
+                  <p>{{curso.infos}}</p>
+                  <p>
+                    <a href="{{curso.find}}" target="_blank">Link</a>
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
           
         </div>

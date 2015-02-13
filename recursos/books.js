@@ -15,10 +15,6 @@ angular.module('bookApp', [])
       return RecursoService.cursos();
     };
     
-    self.blogs = function () {
-      return RecursoService.blogs();
-    }
-    
     self.getReClass = function (status) {
       return {
         recomendo: status.recomendo,
@@ -41,19 +37,11 @@ angular.module('bookApp', [])
       {pic: 'book/dont.jpeg', title: 'Don\'t Make Me Think', infos: 'Na categoria UX/UI que todo desenvolvedor deveria ler. O texto parece uma conversa. Com pelo menos uma imagem por página. Não tem como não entender e passar a ter noção do que vai na tela do user.', find: 'url', recomendo: true}
     ];
     var cursos = [
-      {pic: '', title: 'Head First', infos: 'Bem bom', find: 'url'},
-      {pic: '', title: 'Head First', infos: 'Bem bom', find: 'url'},
-      {pic: '', title: 'Head First', infos: 'Bem bom', find: 'url'},
-      {pic: '', title: 'Head First', infos: 'Bem bom', find: 'url'},
-      {pic: '', title: 'Head First', infos: 'Bem bom', find: 'url'},
-    ];
-    var blogs = [
-      {pic: '', title: 'Head First', infos: 'Bem bom', find: 'url'},
-      {pic: '', title: 'Head First', infos: 'Bem bom', find: 'url'},
-      {pic: '', title: 'Head First', infos: 'Bem bom', find: 'url'},
-      {pic: '', title: 'Head First', infos: 'Bem bom', find: 'url'},
-      {pic: '', title: 'Head First', infos: 'Bem bom', find: 'url'},
-      {pic: '', title: 'Head First', infos: 'Bem bom', find: 'url'},
+      {pic: 'book/codeschool.png', title: 'Code School', infos: 'Pago. Assinei por um mês numa promoção de $9 e gostei bastante. Fiz os cursos de Javascript, jQuery, AngularJS e git. Os professores e a didática são bem descontraídos, o que pra mim facilitou o aprendizado. Além de vídeos tem vários exercícios. Entre os cursos de navegador, esse é o melhor ao lado da Treehouse.', find: 'https://www.codeschool.com', recomendo: true},
+      {pic: 'book/codecademy.png', title: 'Codecademy', infos: 'Grátis. Fiz o curso de HTML, CSS e Javascript. Os dois primeiros eu recomendo, mas não o segundo. NÃO APRENDA JAVASCRIPT na codecademy. O mecanismo do curso de JS é lento e bugado e ensina más práticas da linguagem. No geral, recomendo.', find: 'http://www.codecademy.com/pt-BR/learn', recomendo: true},
+      {pic: 'book/treehouse.png', title: 'Treehouse', infos: 'Pago. O mais completo. Tem vários cursos, do básico ao avançado. Fiz aqui cursos de design, UX, front-end (HTML, CSS, JS), mídias sociais, Illustrator, Photoshop, identidade visual, SASS e git! Recomendo demais.', find: 'http://referrals.trhou.se/estevanmaito', recomendo: true},
+      {pic: 'book/lynda.png', title: 'Lynda', infos: 'Pago. Você encontra uma infinidade de cursos na Lynda. Fiz cursos de introdução à programação, Javascript, fundamentos de design e layout. Dentre todos, os melhores professores. Peca por não ter exercícios como os outros, só vídeo. Mas mesmo assim são ótimos.', find: 'https://www.lynda.com', recomendo: true},
+      {pic: 'book/tuts.png', title: 'Tuts Plus', infos: 'Pago. Cursos variados de mais ou menos 2-3hs. Fiz cursos de linha de comando e web design responsivo. Bem explicados, mas sem exemplos, só vídeo. No nível da Lynda. Eles têm também um blog com muito conteúdo, e o melhor, de graça.', find: 'http://tutsplus.com/courses', recomendo: true},
     ];
     
     return {
@@ -62,9 +50,6 @@ angular.module('bookApp', [])
       },
       cursos: function () {
         return cursos;
-      },
-      blogs: function () {
-        return blogs;
       }
     }
     
