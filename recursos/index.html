@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-BR" ng-app="bookApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Recursos - Estevan Maito</title>
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../css/main.css">
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-56295393-1', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+</head>
+<body>
+  
+  <header class="header">
+    <a href="/" class="logo">Estevan Maito</a>
+    <nav class="nav">
+      <ul class="nav-list">
+        <li><a href="/web">web</a></li>
+        <li><a href="/blog">blog</a></li>
+        <li><a href="/contato">contato</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <section>    
+    <div class="jumbo">
+      <h1>LIVROS, CURSOS E MAIS</h1>
+    </div>
+    
+    <div class="container recursos">
+      <p class="intro">Tudo que aprendi sobre aplicações web, mídias sociais e linguagens de programação foi por conta própria, garimpando blogs, fóruns e mais um pouco. Poderia ter sido mais fácil se eu já tivesse todos os recursos certos e não precisasse testar tudo que encontrei. Por isso, me sinto obrigado a compartilhar o que eu descobri.</p>
+      
+       <div class="row">
+        <h2>Escolha a categoria abaixo:</h2>
+      </div>
+      
+      <div ng-controller="BookCtrl as book">
+        <button ng-click="book.open('livros')">Livros</button>
+        <button ng-click="book.open('cursos')">Cursos</button>
+        <button ng-click="book.open('blogs')">Blogs</button>
+        <div ng-switch on="book.tab">
+          
+          <div ng-switch-when="livros" class="livros">
+            Filtrar:
+             
+              <input type="radio" name="recomendo" id="all" ng-model="recFilter" ng-value=""><label for="all">Todos</label>
+              <input type="radio" name="recomendo" id="rec" ng-model="recFilter" ng-value="recomendo=true"><label for="rec">Recomendo</label>
+              <input type="radio" name="recomendo" id="nrec" ng-model="recFilter" ng-value="recomendo=false"><label for="nrec">Não recomendo</label>
+            
+            <div ng-repeat="livro in book.livros() | filter:recFilter">
+              
+              <div class="col-4">
+                <div class="caixa">
+                  <span ng-class="book.getReClass(livro)"></span><h5>{{livro.title}}</h5>
+                  <img ng-src="{{livro.pic}}" alt="Capa de livro" width="150" height="200">
+                  <p>{{livro.infos}}</p>
+                  <p><a href="">Amazon</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div ng-switch-when="cursos" class="cursos">
+            Em breve
+          </div>
+          
+          <div ng-switch-when="blogs" class="blogs">
+            Em breve
+          </div>
+          
+        </div>
+        
+      </div>
+    
+    </div>
+  </section>
+  
+  <footer class="footer">
+    <div class="container">
+      <img src="../img/eu.jpg" alt="Foto Estevan" width="200">
+      <p>
+        Eu sou Estevan Maito, desenvolvedor web, <a href="/recursos">autodidata</a>, adepto da <a href="http://pt.wikipedia.org/wiki/T%C3%A9cnica_pomodoro" target="_blank">técnica do pomodoro</a> e certificado <a href="https://www.google.com.br/partners/#i_profile;idtf=107845795395693660963;" target="_blank">Google Analytics</a> localizado em Caxias do Sul, RS. Você me encontra constantemente <a href="/blog">escrevendo</a>, <a href="/videos">gravando</a> e <a href="https://twitter.com/estevanmaito">twitando</a>. Também criei um aplicativo que <a href="/pomodoro">me ajuda a manter o ritmo</a> e atenção.
+      </p>
+    </div>
+  </footer>
+  
+  <script src="../js/angular.min.js"></script>
+  <script src="books.js"></script>
+  
+</body>
+</html>
