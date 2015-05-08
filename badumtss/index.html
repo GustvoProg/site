@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Ba Dum Tsshake</title>
+    <style>
+        body {
+            width: 100%;
+            height: 100vh;
+            background-color: aquamarine;
+        }
+    </style>
     <script src="shake.js"></script>
 </head>
 <body>
@@ -11,14 +18,13 @@
     
     <script>
         var myShakeEvent = new Shake({
-            threshold: 15, // optional shake strength threshold
-            timeout: 1000 // optional, determines the frequency of event generation
+            threshold: 15
         });
-        myShakeEvent.start();
         
+        myShakeEvent.start();
         window.addEventListener('shake', shakeEventDidOccur, false);
         function shakeEventDidOccur () {
-            document.getElementById('play').play();
+            alert('shake!');
         }
     </script>
 </body>
