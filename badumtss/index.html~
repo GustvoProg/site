@@ -30,9 +30,11 @@
             window.addEventListener('shake', shakeEventDidOccur, false);
             function shakeEventDidOccur () {
                 alert('inicio');
-                document.getElementById('play').play();
+                //document.getElementById('play').play();
+                var audio1 = new Audio("badumtss.ogg");
+                audio1.play();
                 alert('fim');
-                document.getElementById('play').setAttribute('src', '');
+                //document.getElementById('play').setAttribute('src', '');
             }
         };
         
