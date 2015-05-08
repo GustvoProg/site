@@ -17,15 +17,20 @@
     <audio id="play" src="badumtss.mp3" type="audio/mpeg"></audio>
     
     <script>
-        var myShakeEvent = new Shake({
-            threshold: 15
-        });
+        window.onload = function() {
+            var myShakeEvent = new Shake({
+                threshold: 7
+            });
+
+            myShakeEvent.start();
+            window.addEventListener('shake', shakeEventDidOccur, false);
+            function shakeEventDidOccur () {
+                alert('inicio');
+                document.getElementById('play').play();
+                alert('fim');
+            }
+        };
         
-        myShakeEvent.start();
-        window.addEventListener('shake', shakeEventDidOccur, false);
-        function shakeEventDidOccur () {
-            document.getElementById('play').play();
-        }
     </script>
 </body>
 </html>
