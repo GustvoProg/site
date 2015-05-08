@@ -26,8 +26,10 @@
             window.addEventListener('shake', shakeEventDidOccur, false);
             function shakeEventDidOccur () {
                 alert('inicio');
+                document.getElementById('play').setAttribute('src', 'badumtss.mp3');
                 document.getElementById('play').play();
                 alert('fim');
+                document.getElementById('play').setAttribute('src', '');
             }
         };
         
