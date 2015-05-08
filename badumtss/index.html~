@@ -14,7 +14,11 @@
 </head>
 <body>
     
-    <audio id="play" src="" type="audio/mpeg"></audio>
+    <audio id="play" src="" type="audio/mpeg">
+    	<source src="badumtss.m4a" type="audio/mpeg" />
+    	<source src="badumtss.ogg" type="audio/ogg" />
+    	<source src="badumtss.mp3" type="audio/mpeg" />
+    </audio>
     
     <script>
         window.onload = function() {
@@ -26,7 +30,6 @@
             window.addEventListener('shake', shakeEventDidOccur, false);
             function shakeEventDidOccur () {
                 alert('inicio');
-                document.getElementById('play').setAttribute('src', 'badumtss.mp3');
                 document.getElementById('play').play();
                 alert('fim');
                 document.getElementById('play').setAttribute('src', '');
