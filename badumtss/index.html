@@ -29,10 +29,13 @@
             myShakeEvent.start();
             window.addEventListener('shake', shakeEventDidOccur, false);
             function shakeEventDidOccur () {
-                //document.getElementById('play').play();
-                var audio1 = new Audio("badumtss.ogg");
-                audio1.play();
-                //document.getElementById('play').setAttribute('src', '');
+                alert('inicio');
+                 //document.getElementById('play').play();
+-                var audio1 = new Audio("badumtss.mp3");
++                var audio1 = new Audio("badumtss.ogg");
+                 audio1.play();
+                 alert('fim');
+                 //document.getElementById('play').setAttribute('src', '');
             }
         };
         
