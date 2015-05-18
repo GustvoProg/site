@@ -14,7 +14,7 @@
 </head>
 <body>
     
-    <audio id="play" src="" type="audio/mpeg">
+    <audio id="play" src="">
     	<source src="badumtss.m4a" type="audio/mpeg" />
     	<source src="badumtss.ogg" type="audio/ogg" />
     	<source src="badumtss.mp3" type="audio/mpeg" />
@@ -31,11 +31,10 @@
             function shakeEventDidOccur () {
                 alert('inicio');
                  //document.getElementById('play').play();
--                
                  var audio1 = new Audio("badumtss.ogg");
                  audio1.play();
-+                var audio2 = new Audio("badumtss.m4a");
-+                audio2.play();
+                 var audio2 = new Audio("badumtss.m4a");
+                 audio2.play();
                  alert('fim');
                  //document.getElementById('play').setAttribute('src', '');
             }
