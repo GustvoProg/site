@@ -1,17 +1,21 @@
 //TODO: Portar para Angular
 $(document).ready(function() {
-  var min = 0;
-  var sec = 0;
-  var count = 0;
-  var running = false;
-  var pomos = [];
-  
-  $('.timer').html(min + ':' + sec);
-  
-  $('#start').on('click', function() {
+  var min = 0,
+      sec = 0,
+      count = 0,
+      running = false,
+      pomos = [],
+      start = document.getElementById('start');
+
+  function startEvent () {
     running = true;
     checkTimer();
-  });
+    start.removeEventListener('click', startEvent, false);
+  }
+
+  start.addEventListener('click', startEvent, false)
+  
+  $('.timer').html(min + ':' + sec);
   
   function startPomodoro() {
     setTimeout(function() {
@@ -46,10 +50,9 @@ $(document).ready(function() {
     }, 1000);
   }
   
-  //TODO: Parar no 15
   function checkTimer() {
     pomos = [25,5,25,5,25,5,25,15];
-    if (count <= pomos.length) {
+    if (count != pomos.length) {
       min = pomos[count];
       getNow();
       count++;
