@@ -146,7 +146,7 @@
     getLocation(function(today) {
       var day = document.querySelector('.today');
       document.getElementById('icon-today').className = 'wi wi-' + icons[today.weather[0].id];
-      document.getElementById('container').style.backgroundImage = changeBackground();
+      document.getElementById('container').style.backgroundImage = changeBackground(today.weather[0].id);
       document.getElementById('city').innerHTML = today.name;
       document.getElementById('temperature-now').innerHTML = Math.round(today.main.temp);
       document.getElementById('temperature-now').setAttribute('data-celsius', Math.round(today.main.temp));

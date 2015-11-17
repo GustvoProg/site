@@ -1,1 +1,1 @@
-body{font-size:16px}
+body,ul a{color:#444}body{font-size:16px;background:#e4e4e4}#wikiForm{text-align:center}#wikiForm #search{border:none;border-bottom:2px solid #f4f4f4;background:0 0;height:80px;width:550px;font-size:2em;color:#444}.container{width:90%;margin:0 auto}#query{font-style:italic}.hide{display:none}ul{list-style:none;width:80%;margin:2% auto;padding:2.7% 5%;background:#fff}ul li{padding:1% 0;border-bottom:1px solid #ddd}ul a{display:inline-block;width:100%;text-decoration:none}ul a:hover{color:#000}ul a:visited{color:#701}

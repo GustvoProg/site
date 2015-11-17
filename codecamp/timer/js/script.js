@@ -34,11 +34,16 @@ $(document).ready(function() {
   }
 
   reset.addEventListener('click', function() {
+    var started = $('.started');
+    var done = $('.done');
     count = min = sec = 0;
     running = false;
     $('.timer').html(0 + ':' + 0);
-    for (var i = 0; i < $('.started').length; i++) {
-      $('.started')[i].innerHTML = '';
+    for (var i = 0; i < started.length; i++) {
+      started[i].innerHTML = '';
+    }
+    for (var i = 0; i < done.length; i++) {
+      done[i].className = '';
     }
     clearTimeout(timerID);
     start.addEventListener('click', startEvent, false);
@@ -85,7 +90,7 @@ $(document).ready(function() {
     pomos = [25,5,25,5,25,5,25,15];
     if (count != pomos.length) {
       min = pomos[count];
-      if (pomos[count] !== 25) {
+      if (pomos[count] && pomos[count] !== 25) {
         pomosToday.innerHTML = Number(pomosToday.innerHTML) + 1;
         localStorage.setItem('pomosToday', Number(pomosToday.innerHTML) + 1);
         localStorage.setItem('pomosHistory', Number(localStorage.getItem('pomosHistory')) + 1);
