@@ -194,6 +194,7 @@
   // events
   window.addEventListener('DOMContentLoaded', ready, false);
   function ready() {
+    window.addEventListener('touchend', clickEvent, false);
     window.addEventListener('click', clickEvent, false);
   }
 

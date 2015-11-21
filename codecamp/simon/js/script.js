@@ -49,7 +49,9 @@
     };
 
     this.playTone = function(index) {
-      gainNodes[index].gain.linearRampToValueAtTime(0.5, audioCtx.currentTime + 0.1);
+      console.log('index', index);
+      if (index)
+      gainNodes[index].gain.linearRampToValueAtTime(1, audioCtx.currentTime + 0.1);
     };
 
     this.stopTone = function() {
@@ -92,6 +94,7 @@
     function lightSequence() {
       var i = 0;
       allowClick = false;
+      document.querySelector('.colorsWrapper').classList.toggle('disableClick');
 
       document.getElementById(sequence[i]).classList.add('light');
       self.playTone(sequence[i]);
@@ -112,6 +115,7 @@
         if (i === sequence.length) {
           resetTimers();
           allowClick = true;
+          document.querySelector('.colorsWrapper').classList.toggle('disableClick');
         }
       }, setSpeed(sequence.length));
     }

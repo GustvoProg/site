@@ -1,132 +1,205 @@
-$(document).ready(function() {
-  var min = 0,
-      sec = 0,
-      count = 0,
-      running = false,
-      pomos = [],
-      timerID,
-      today = new Date(),
-      day = today.getDate(),
-      start = document.getElementById('start'),
-      reset = document.getElementById('reset'),
-      pomosToday = document.getElementById('pomosToday'),
-      pomosHistory = document.getElementById('pomosHistory');
-  
-  if (localStorage.getItem('date') && new Date(localStorage.getItem('date')).getDate() === day) {
-    if (localStorage.getItem('pomosToday')) {
-      pomosToday.innerHTML = localStorage.getItem('pomosToday');
-    }
-  } else {
-    localStorage.setItem('date', new Date());
-    localStorage.setItem('pomosToday', 0);
-  }
+(function() {
+  // ready event
+  window.addEventListener('DOMContentLoaded', readyEvent, false);
 
-  if (localStorage.getItem('pomosHistory')) {
-    pomosHistory.innerHTML = localStorage.getItem('pomosHistory');
-  } else {
-    localStorage.setItem('pomosHistory', 0);
-  }
+  // avoid retrieving document every time
+  var doc = document;
+  var startButton = doc.getElementById('start');
+  var resetButton = doc.getElementById('reset');
+  var moreButton = doc.getElementById('more');
 
-  function startEvent () {
-    running = true;
-    checkTimer();
-    start.removeEventListener('click', startEvent, false);
-  }
+  var Data = function() {
+    var self = this;
+    this.set = function(field, data) {
+      var storedData = self.get(field) ? self.get(field) : [];
+      storedData.push(data);
+      localStorage.setItem(field, JSON.stringify(storedData));
+    };
+    this.get = function(field) {
+      return JSON.parse(localStorage.getItem(field));
+    };
+  };
 
-  reset.addEventListener('click', function() {
-    var started = $('.started');
-    var done = $('.done');
-    count = min = sec = 0;
-    running = false;
-    $('.timer').html(0 + ':' + 0);
-    for (var i = 0; i < started.length; i++) {
-      started[i].innerHTML = '';
-    }
-    for (var i = 0; i < done.length; i++) {
-      done[i].className = '';
-    }
-    clearTimeout(timerID);
-    start.addEventListener('click', startEvent, false);
-  },false);
+  var Pomodoro = function() {
+    var self = this;
+    var pomos = [25,5,25,5,25,5,25,15];
+    var pomosDone = 0;
+    var min = 0;
+    var sec = 0;
+    var running = false;
+    var oneSecondTimeout;
+    var data = new Data();
 
-  start.addEventListener('click', startEvent, false);
-  
-  $('.timer').html(min + ':' + sec);
-  
-  function startPomodoro() {
-    timerID = setTimeout(function() {
+    // get start button click
+    this.start = function() {
       running = true;
-      if (min === 0 && sec === 0) {
-        running = false;
+      showNotification('Pomodoro is now running!', 'Pomodoro');
+      checkTimer();
+      self.refreshHistory();
+      startButton.removeEventListener('click', startClick, false);
+    };
+
+    this.reset = function() {
+      doc.getElementById('mask').style.height = 0;
+      pomosDone = min = sec = 0;
+      running = false;
+      updateTimer(0, 0);
+      clearStarted();
+      clearTimeout(oneSecondTimeout);
+      startButton.addEventListener('click', startClick, false);
+    };
+
+    function showNotification(nBody, nTitle) {
+      var options = {
+        body: nBody
+      };
+
+      if (!('Notification' in window)) {
+        return false;
       }
-      if (running) {
-        if (sec === 0) {
-          sec = 59;
-          min -= 1;
+
+      if (Notification.permission === 'granted') {
+        var n = new Notification(nTitle, options);  
+        setTimeout(n.close(), 4000);
+      } else {
+        Notification.requestPermission(function(permission) {
+          if (permission === 'granted') {
+            var n = new Notification(nTitle, options);
+            setTimeout(n.close(), 4000);
+          }
+        });
+      }
+      
+    }
+
+    // clear started time
+    function clearStarted() {
+      var started = doc.querySelectorAll('.started');
+      for (var i = 0; i < started.length; i++) {
+        started[i].innerHTML = '';
+      }
+    }
+
+    function startPomodoro() {
+      oneSecondTimeout = setTimeout(function() {
+        running = true;
+        if (min === 0 && sec === 0) {
+          running = false;
         }
-        else {
-          sec--;
+        if (running) {
+          updateMask();
+          if (sec === 0) {
+            sec = 59;
+            min -= 1;
+          } else {
+            sec--;
+          }
+          if (sec < 10) sec = '0' + sec;
+          if (min < 10) min = '0' + min;
+
+          updateTimer(min, sec);
+          sec = Number(sec);
+          min = Number(min);
+          startPomodoro();
+        } else {
+          doc.getElementById('play').play();
+          checkTimer();
         }
-        if (sec < 10) {
-          sec = '0' + sec;
+      }, 1000);
+    }
+
+    function checkTimer() {
+      if (pomosDone !== pomos.length) {
+        if (pomos[pomosDone] && pomos[pomosDone] !== 25) {
+          showNotification('Pomo finished. Time to rest!', 'Pomodoro');
+          data.set('pomosHistory', new Date());
+          self.refreshHistory();
         }
-        
-        if (min < 10) {
-          min = '0' + min;
-        }
-        $('.timer').html(min + ':' + sec);
-        sec = Number(sec);
-        min = Number(min);
+        min = pomos[pomosDone];
+        pomoStartedTime();
+        pomosDone++;
+        doc.getElementById('mask').style.height = 0;
         startPomodoro();
       }
-      else {
-        document.getElementById('play').play();
-        checkTimer();
+    }
+
+    this.refreshHistory = function() {
+      doc.getElementById('pomosToday').textContent = getPomosMadeToday();
+      doc.getElementById('pomosHistory').textContent = data.get('pomosHistory').length;
+    };
+
+    function getPomosMadeToday() {
+      var p = data.get('pomosHistory');
+      var today = toLocalDate(new Date());
+      var count = 0;
+      var date;
+      for (var i = p.length - 1; i >= 0; i--) {
+        date = new Date(Date.parse(p[i]));
+        if (date.getDate() === today.getDate()) {
+          count++;
+        }
       }
-    }, 1000);
-  }
-  
-  function checkTimer() {
-    pomos = [25,5,25,5,25,5,25,15];
-    if (count != pomos.length) {
-      min = pomos[count];
-      if (pomos[count] && pomos[count] !== 25) {
-        pomosToday.innerHTML = Number(pomosToday.innerHTML) + 1;
-        localStorage.setItem('pomosToday', Number(pomosToday.innerHTML) + 1);
-        localStorage.setItem('pomosHistory', Number(localStorage.getItem('pomosHistory')) + 1);
+      return count;
+    }
+
+    function toLocalDate(date) {
+      var offset = new Date().getTimezoneOffset();
+      return new Date(date.getTime() - (offset * 60 * 1000));
+    }
+
+    function updateTimer(min, sec) {
+      var timer = doc.querySelectorAll('.timer');
+      for (var i = 0; i < timer.length; i++) {
+        timer[i].textContent = min + ':' + sec;
       }
-      getNow();
-      count++;
-      startPomodoro();
-    }    
+    }
+
+    // update the time the pomo started
+    function pomoStartedTime() {
+      var d = new Date();
+      var hour = d.getHours() < 10 ? '0' + d.getHours() : d.getHours();
+      var minute = d.getMinutes() < 10 ? '0' + d.getMinutes() : d.getMinutes();
+      var cel = doc.querySelectorAll('.started')[pomosDone];
+      cel.textContent = hour + ':' + minute;
+    }
+
+    function formatPercentageHeight(element) {
+      var h = element.style.height;
+      return Number(h.substr(0, h.indexOf('%')));
+    }
+
+    function updateMask() {
+      var pomosHeight = pomos[pomosDone - 1] * 60;
+      var move = 100 / pomosHeight;
+      var el = doc.getElementById('mask');
+      if (el.style.height) {
+        el.style.height = formatPercentageHeight(el) + move + '%';
+      } else {
+        el.style.height = el.style.height + move + '%';
+      }
+    }
+  };
+
+  var timer = new Pomodoro();
+
+  function readyEvent() {
+    // register click events
+    startButton.addEventListener('click', startClick, false);
+    resetButton.addEventListener('click', resetClick, false);
+    moreButton.addEventListener('click', moreClick, false);
+
+    timer.refreshHistory();
   }
-  
-  function getNow() {
-    var d = new Date();
-    var hourNow = d.getHours() < 10 ? '0' + d.getHours() : d.getHours();
-    var minuteNow = d.getMinutes() < 10 ? '0' + d.getMinutes() : d.getMinutes();
-    var tableRow = $('#pomo' + count).addClass('done');
-    var cel = tableRow.children('.started');
-    var t = hourNow + ':' + minuteNow;
-    cel.html(t);
+
+  function startClick() {
+    timer.start();
   }
-});
 
+  function resetClick() {
+    timer.reset();
+  }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  function moreClick() {
+    doc.getElementById('history').classList.toggle('hide');
+  }
+}());
