@@ -50,8 +50,9 @@
 
     this.playTone = function(index) {
       console.log('index', index);
-      if (index)
-      gainNodes[index].gain.linearRampToValueAtTime(1, audioCtx.currentTime + 0.1);
+      if (index === 0 || index) {
+        gainNodes[index].gain.linearRampToValueAtTime(1, audioCtx.currentTime + 0.1);
+      }
     };
 
     this.stopTone = function() {
